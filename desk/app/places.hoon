@@ -69,7 +69,7 @@
   ::NOTE  not really just locally-sourced data,
   ::      but that's probably the better behavior anyway.
   ?~  fresh  ~
-  ?:  (gth n 7)  ~  :: how many n?
+  ?:  (gth n 10)  ~  :: how many n?
   :-  [%give %fact ~ %place !>(i.fresh)]
   $(fresh t.fresh, n +(n))
 ::
@@ -95,8 +95,7 @@
   |=  =path
   ^-  (unit (unit cage))
   ?+  path  (on-peek:def path)
-    [%x %all ~]
-    :: =/  placc  ~[[lat=69 long=420 desc="hey"] [lat=1 long=2 desc="there"]]
+    [%x %places %all ~]
     ``places+!>(fresh)
   ==
   ::TODO
