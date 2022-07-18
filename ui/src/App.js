@@ -53,13 +53,18 @@ const App = () => {
       return
     }
 
-    await window.urbit.poke({
-      app: "places",
-      mark: "place",
-      json: { lat: latt, long: longg, desc: description },
-      onSuccess: () => handlePokeSuccess(potentialPlace.lat, potentialPlace.long, description),
-      onError: () => setInfoMessage("something went wrong."),
-    })
+    try {
+      await window.urbit.poke({
+        app: "places",
+        mark: "place",
+        json: { lat: latt, long: longg, desc: description },
+        onSuccess: () => handlePokeSuccess(potentialPlace.lat, potentialPlace.long, description),
+        onError: () => setInfoMessage("something went wrong."),
+      })
+    } catch (e) {
+      setInfoMessage("error, something went wrong!")
+      console.log(e)
+    }
   }
   
 
@@ -124,17 +129,16 @@ const App = () => {
 
     // commented out connect() for production build, if using locally, call connect() here
 
-    connect()
+    // connect()
     setTimeout(() => getLocations(), 750) // wait 0.75s before scrying, session.js cannot seem to quite keep up.
   }, [])
 
   const About = () => {
     return (
       <div style={{marginTop: '1rem'}}>
-        <span>%places is heavily inspired by %rumors from ~paldev </span><br />
-        <span>it uses its gossip.hoon library to pass along data from pals</span><br />
-        <span>github.com</span><br />
-        <span>~bitful-pannul</span>
+        <span>%places is inspired by %rumors from ~paldev </span><br />
+        <span>it uses its gossip.hoon library to pass along places from pals</span><br />
+        <span>~bitful-pannul/urbit-explorers-club</span><br />
       </div>
     )
   }
@@ -183,7 +187,7 @@ const App = () => {
     />
     {/* names of places... turn on everywhere or not?*/}
     <TileLayer
-      attribution='Stamen Design, <a href="www.google.com">Urbit Explorers Club</a>'
+      attribution='Stamen Design, <a href="web+urbitgraph://group/~bitful-pannul/urbit-explorers-club/">Urbit Explorers Club</a>'
       url='https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}{r}.{ext}'
       subdomains='abcd'
       minZoom={6}

@@ -1,11 +1,10 @@
-
-
 :~  title+'places'
-    info+'a mysterious map filled by waypoints... from frens'
+    info+'a mysterious map filled with markers... from frens'
     color+0x2e.4347
-    glob-http+['https://bootstrap.urbit.org/glob-0v5.hurm4.ejod5.ngg9h.iub9i.n1j7o.glob' 0v5.hurm4.ejod5.ngg9h.iub9i.n1j7o]
-    base+'%APPSLUG%'
+    base+'places'
+    image+'https://i.imgur.com/ao5gLRg.png'
     version+[0 0 1]
-    website+'https://github.com'
+    website+'https://urbit.org'
     license+'MIT'
+    glob-ames+[~norref-polnum-bitful-pannul 0v0]
 ==

@@ -1,6 +1,6 @@
 {
   "name": "places",
-  "homepage": "/places",
+  "homepage": "/apps/places",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
