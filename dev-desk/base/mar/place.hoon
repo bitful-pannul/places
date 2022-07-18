@@ -1,13 +1,15 @@
 /-  *places
-|_  plac=place
+|_  plc=place
 ++  grad  %noun
-++  grow
-  |%
-  ++  noun  plac
-  --
 ++  grab
   |%
   ++  noun  place
+  ++  json  from-jason
+  --
+++  grow
+  |%
+  ++  noun  plc
+  ++  json  (to-jason plc)
   --
 --
 

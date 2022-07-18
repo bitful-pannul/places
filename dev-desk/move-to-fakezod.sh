@@ -1,4 +1,4 @@
 #!/bin/bash
 # rsync script
-rsync -av --delete base/ ../../dev/base
+rsync -av --delete base/ ../../nec/base
 
