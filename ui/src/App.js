@@ -14,7 +14,7 @@ const App = () => {
   const [description, setDescription] = useState("")
   const [error, setError] = useState("")
   const [isHovering, setIsHovering] = useState(false);
-  
+
 
 
   // if served directly by ship, unnecessary. for dev purposes 
@@ -36,7 +36,7 @@ const App = () => {
     console.log(res)
 
     const newPlaces = res?.places.map((place, i) => {
-      return {lat: Number(place.lat.substring(1)), long: Number(place.long.substring(1)), desc: place.desc}
+      return { lat: Number(place.lat.substring(1)), long: Number(place.long.substring(1)), desc: place.desc }
     })
     console.log('scried places: ', newPlaces)
 
@@ -46,7 +46,7 @@ const App = () => {
   const handleAddLocation = async () => {
     const latt = "~" + potentialPlace.lat
     const longg = "~" + potentialPlace.long
-    
+
     // todo: add checkers & error messages if something goes wrong
     if (description.length < 3) {
       setInfoMessage("!warn, maybe you forgot your description?")
@@ -66,16 +66,16 @@ const App = () => {
       console.log(e)
     }
   }
-  
+
 
   const LocationFinder = () => {
     const map = useMapEvents({
-        click(e) {
-            console.log(e.latlng);
-            setPotentialPlace({lat: e.latlng.lat, long: e.latlng.lng})
-            //addLocation(e.latlng.lat, e.latlng.lng)
-	          //setPlaces([...places, {lat: e.latlng.lat, long: e.latlng.lng, desc: "yo babe this is a new place!"}])
-        },
+      click(e) {
+        console.log(e.latlng);
+        setPotentialPlace({ lat: e.latlng.lat, long: e.latlng.lng })
+        //addLocation(e.latlng.lat, e.latlng.lng)
+        //setPlaces([...places, {lat: e.latlng.lat, long: e.latlng.lng, desc: "yo babe this is a new place!"}])
+      },
     });
     return null;
   };
@@ -87,7 +87,7 @@ const App = () => {
 
   const handlePokeSuccess = (lat, long, desc) => {
     setInfoMessage("poke succeeded!")
-    const awaitingRefreshPlace = {lat, long, desc}
+    const awaitingRefreshPlace = { lat, long, desc }
     setPlaces([...places, awaitingRefreshPlace])
     setDescription("")
   }
@@ -106,8 +106,8 @@ const App = () => {
     setIsHovering(false);
   };
 
-  
-  const customIcon = new Icon({iconUrl: redmarker, iconSize: [25, 25]})
+
+  const customIcon = new Icon({ iconUrl: redmarker, iconSize: [25, 25] })
 
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const App = () => {
     window.urbit.onOpen = () => setStatus("con");
     window.urbit.onRetry = () => setStatus("try");
     window.urbit.onError = (err) => setStatus("err");
-    
+
     const L = require("leaflet");
 
     delete L.Icon.Default.prototype._getIconUrl;
@@ -135,10 +135,13 @@ const App = () => {
 
   const About = () => {
     return (
-      <div style={{marginTop: '1rem'}}>
+      <div style={{ marginTop: '1rem' }}>
         <span>%places is inspired by %rumors from ~paldev </span><br />
         <span>it uses its gossip.hoon library to pass along places from pals</span><br />
-        <span>~bitful-pannul/urbit-explorers-club</span><br />
+        <span>&nbsp;</span><br />
+        <span style={{fontStyle: 'italic'}}>"Look for [redacted] among frens and among foes, above the earth and below it!"</span><br />
+        <span>&nbsp;</span><br />
+        <span style={{fontWeight: 'bold'}}>~bitful-pannul/urbit-explorers-club</span><br />
       </div>
     )
   }
@@ -147,76 +150,78 @@ const App = () => {
   return (
     <>
       <div className="info-part">
-      <div className='top-bar'>
-        <span>&nbsp;％ｐｌａｃｅｓ</span>
-        {isHovering && <About />}
-        <span>
-          <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-            ａｂｏｕｔ
-          </div>
-          <img src={palm} width="80px" height="80px"/>
-        </span>
+        <div className='top-bar'>
+          <span>&nbsp;％ｐｌａｃｅｓ</span>
+          {isHovering && <About />}
+          <span>
+            <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+              ａｂｏｕｔ
+            </div>
+            <img src={palm} width="80px" height="80px" />
+          </span>
+        </div>
+        <div>
+          <span>
+            <label>𝚕𝚊𝚝𝚒𝚝𝚞𝚍𝚎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input placeholder='69.420123456' value={potentialPlace.lat} style={{ width: '11rem' }} />
+          </span>
+        </div>
+        <div>
+          <span>
+            <label>𝚕𝚘𝚗𝚐𝚒𝚝𝚞𝚍𝚎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input placeholder='169.420123456' value={potentialPlace.long} style={{ width: '11rem' }} />
+          </span>
+        </div>
+        <div>
+          <label style={{ verticalAlign: 'top' }}>𝚍𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗&nbsp;&nbsp;</label>
+          <textarea onChange={handleDescription} placeholder='perhaps a new quest...'></textarea>
+        </div>
+        <div className='buttonz'>
+          <span>
+            <button onClick={handleAddLocation}>𝚊𝚍𝚍 𝚙𝚕𝚊𝚌𝚎!</button>
+          </span>
+          {error && <span style={{ backgroundColor: '#ffe8e9' }}>{error}</span>}
+          {'|'}
+        </div>
       </div>
-      <div>
-        <span>
-          <label>𝚕𝚊𝚝𝚒𝚝𝚞𝚍𝚎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input placeholder='69.420123456' value={potentialPlace.lat} style={{width: '11rem'}}/>
-        </span>
-      </div>
-      <div>
-        <span>
-          <label>𝚕𝚘𝚗𝚐𝚒𝚝𝚞𝚍𝚎&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input placeholder='169.420123456' value={potentialPlace.long} style={{width: '11rem'}}/>
-        </span>
-      </div>
-      <div>
-        <label style={{verticalAlign: 'top'}}>𝚍𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗&nbsp;&nbsp;</label>
-        <textarea onChange={handleDescription} placeholder='maybe a new conquest...'></textarea>
-      </div>
-      <div className='buttonz'>
-      <span>
-        <button onClick={handleAddLocation}>𝚊𝚍𝚍 𝚙𝚕𝚊𝚌𝚎!</button>
-        </span>
-      {error && <span style={{backgroundColor: '#ffe8e9'}}>{error}</span>}
-      {'|'}
-      </div>
-      </div>
-      
-    <MapContainer className="map-container" center={[39.5050, 24.09]} zoom={6} >
-    <TileLayer
-      attribution='Tiles &copy; Esri &mdash; Source: i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, Urbit Satellite Society, IGN, IGP, UPR-EGP, the GIS User Community, ~bitful-pannul '
-      url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-    />
-    {/* names of places... turn on everywhere or not?*/}
-    <TileLayer
-      attribution='Stamen Design, <a href="web+urbitgraph://group/~bitful-pannul/urbit-explorers-club/">Urbit Explorers Club</a>'
-      url='https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}{r}.{ext}'
-      subdomains='abcd'
-      minZoom={6}
-      maxZoom={20}
-      ext='png'
-    />
 
-    {places?.map((place, i) => {
-      const pos = [place.lat, place.long]
-      return (
-       <Marker position={pos} key={i+1}>
-	      <Popup>
-	      {`lat: ${place.lat} long: ${place.long} `} <br />
-	      {place.desc}
-	      </Popup>
-       </Marker>
-      )
-    })}
+      <MapContainer className="map-container" center={[39.5050, 24.09]} zoom={6} >
+        <TileLayer
+          attribution='Tiles &copy; Esri &mdash; Source: i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, Urbit Satellite Society, IGN, IGP, UPR-EGP, the GIS User Community, <a href="web+urbitgraph://group/~bitful-pannul/urbit-explorers-club/">Urbit Explorers Club</a>  '
+          url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+        />
+        {/* names of places... turn on everywhere or not?*/}
+        <TileLayer
+          attribution='Stamen Design, ~bitful-pannul'
+          url='https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}{r}.{ext}'
+          subdomains='abcd'
+          minZoom={6}
+          maxZoom={20}
+          ext='png'
+        />
 
-    {/* {Object.keys(potentialPlace) !== 0 && ( */}
-    
-      <Marker icon={customIcon} position={[potentialPlace.lat || 39, potentialPlace.long || 24]} key={1}>
-        <Popup>
-          add your place here.
-        </Popup>
-      </Marker>
-    
-    <LocationFinder />
-    </MapContainer>
+        {places?.map((place, i) => {
+          const pos = [place.lat, place.long]
+          return (
+            <Marker position={pos} key={i + 1}>
+              <Popup>
+                {`lat: ${place.lat} long: ${place.long} `} <br />
+                {place.desc}
+              </Popup>
+            </Marker>
+          )
+        })}
+
+        {/* {Object.keys(potentialPlace) !== 0 && ( */}
+
+        <Marker icon={customIcon} position={[potentialPlace.lat || 39, potentialPlace.long || 24]} key={1}>
+          <Popup>
+            add your place here.
+          </Popup>
+        </Marker>
+
+        <LocationFinder />
+      </MapContainer>
     </>
   );
 }

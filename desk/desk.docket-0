@@ -3,8 +3,8 @@
     color+0x2e.4347
     base+'places'
     image+'https://i.imgur.com/ao5gLRg.png'
-    version+[0 0 1]
-    website+'https://urbit.org'
+    version+[0 0 2]
+    website+'https://github.com/bitful-pannul/places'
     license+'MIT'
-    glob-ames+[~norref-polnum-bitful-pannul 0v0]
+    glob-ames+[~biddyn-bilner-bitful-pannul 0v0]
 ==

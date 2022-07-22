@@ -4,7 +4,7 @@
   position: relative;
   z-index: 1;
   background: rgb(149,239,241) !important;
-  background: linear-gradient(0deg, rgba(149,239,241,1) 0%, rgba(255,192,142,1) 100%) !important;
+  background: linear-gradient(0deg, rgba(255,192,142,1) 0%, rgba(149,239,241,1) 100%) !important;
 
 }
 

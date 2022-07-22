@@ -22,7 +22,7 @@
 =*  state  -
 ::
 %-  %+  agent:gossip
-      [2 %anybody %anybody]
+      [3 %anybody %anybody]
     %+  ~(put by *(map mark $-(* vase)))
       %place
     |=(n=* !>((grab-place n)))
@@ -69,7 +69,7 @@
   ::NOTE  not really just locally-sourced data,
   ::      but that's probably the better behavior anyway.
   ?~  fresh  ~
-  ?:  (gth n 10)  ~  :: how many n?
+  ?:  (gth n 7)  ~  :: how many n?
   :-  [%give %fact ~ %place !>(i.fresh)]
   $(fresh t.fresh, n +(n))
 ::
