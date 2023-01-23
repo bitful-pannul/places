@@ -14,3 +14,5 @@ Another is that places travel 3 hops instead of 2, which means that you might se
 If you want to test it locally, copy the files from `dev-desk` and `|start %pals`, `|start %places`.
 
 A big thanks to `~wicrum-wicrun` for all the help, and `~palfun-faslup` for awesome tips and calling me based for aligning items with &nbps;
+
+![places-demo1-half](https://user-images.githubusercontent.com/109035169/214065127-7f56882b-8e33-41a0-87b8-1fa50e28367b.png)
